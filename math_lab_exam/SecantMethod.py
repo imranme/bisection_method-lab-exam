@@ -115,3 +115,40 @@ def newton_raphson_method(x0, tol=0.0001, max_iter=100):
 # Example usage with initial guess x0 = 1.5
 x0 = 1.5
 newton_raphson_method(x0)
+
+def f(x):
+    # Define the function f(x) = x^3 - x - 2
+    return x**3 - x - 2
+
+def df(x):
+    # Derivative of the function: f'(x) = 3x^2 - 1
+    return 3 * x**2 - 1
+
+def newton_raphson_method(x0, tol=0.0001, max_iter=100):
+    k = 1  # Iteration counter
+    xk = x0
+    fxk = f(xk)
+    dfxk = df(xk)
+
+    # Start the loop for Newton-Raphson method
+    while abs(fxk) > tol and k <= max_iter:
+        xk = xk - fxk / dfxk
+        fxk = f(xk)
+        dfxk = df(xk)
+
+        # Print the current iteration results
+        print(f"Iteration {k}: xk = {xk}, f(xk) = {fxk}")
+        k += 1
+
+    # After convergence or max iterations
+    if abs(fxk) <= tol:
+        print(f"The required root is: {xk}")
+    else:
+        print("The method did not converge within the maximum iterations.")
+
+    return xk
+
+# Example usage with initial guess x0 = 1.5
+x0 = 1.5
+newton_raphson_method(x0)
+
